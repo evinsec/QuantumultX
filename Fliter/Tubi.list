@@ -1,0 +1,8 @@
+
+# > Tubi
+USER-AGENT,Tubi*, Tubi
+DOMAIN-KEYWORD,tubi,Tubi
+DOMAIN-SUFFIX,tubitv.com,Tubi
+DOMAIN-SUFFIX,tubi.video,Tubi
+DOMAIN-SUFFIX,tubi.io,Tubi
+DOMAIN-SUFFIX,adrise.tv,Tubi

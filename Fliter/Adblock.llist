@@ -1,0 +1,11 @@
+# Advertising
+# Domain
+DOMAIN,app-site-association.cdn-apple.com,REJECT
+DOMAIN,video-ads-module.ad-tech.nbcuni.com,REJECT
+
+# Domain Suffix
+DOMAIN-SUFFIX,vungle.com,REJECT
+DOMAIN-SUFFIX,app-measurement.com,REJECT
+DOMAIN-SUFFIX,pubnative.net,REJECT
+DOMAIN-SUFFIX,mopub.com,REJECT
+DOMAIN-SUFFIX,bidease.com,REJECT

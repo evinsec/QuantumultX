@@ -1,0 +1,8 @@
+# > Discovery+
+USER-AGENT,DPlus*,Discovery+
+USER-AGENT,discovery+*,Discovery+
+DOMAIN-SUFFIX,discoveryplus.com,Discovery+
+DOMAIN-SUFFIX,dnitv.com,Discovery+
+DOMAIN-SUFFIX,disco-api.com,Discovery+
+DOMAIN-SUFFIX,uplynk.com,Discovery+
+DOMAIN-SUFFIX,litix.io,Discovery+

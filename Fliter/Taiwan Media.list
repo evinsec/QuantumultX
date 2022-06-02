@@ -1,0 +1,42 @@
+# > CATCHPLAY+
+USER-AGENT,CATCHPLAY*,CATCHPLAY+
+DOMAIN-SUFFIX,catchplay.com,CATCHPLAY+
+DOMAIN,asiaplay-origin.s3.amazonaws.com,CATCHPLAY+
+DOMAIN,tra-ww000-cp.akamaized.net,CATCHPLAY+
+DOMAIN,ols-ww000-cp.akamaized.net,CATCHPLAY+
+DOMAIN,ols-ww100-cp.akamaized.net,CATCHPLAY+
+DOMAIN,dkfhw9rzsr80z.cloudfront.net,CATCHPLAY+
+
+# > Bahamut
+USER-AGENT,Anime*,Bahamut
+HOST,bahamut.akamaized.net,Bahamut
+HOST,gamer-cds.cdn.hinet.net,Bahamut
+HOST,gamer2-cds.cdn.hinet.net,Bahamut
+HOST-SUFFIX,bahamut.com.tw,Bahamut
+HOST-SUFFIX,gamer.com.tw,Bahamut
+
+# > KKBOX
+USER-AGENT,*KKBOX,KKBOX&KKTV
+DOMAIN-SUFFIX,kkbox.com,KKBOX&KKTV
+DOMAIN-SUFFIX,kkbox.com.tw,KKBOX&KKTV
+DOMAIN-SUFFIX,kfs.io,KKBOX&KKTV
+
+# > KKTV
+USER-AGENT,KKTV*,KKBOX&KKTV
+USER-AGENT,com.kktv*,KKBOX&KKTV
+DOMAIN-SUFFIX,kktv.me,KKBOX&KKTV
+DOMAIN-SUFFIX,kktv.com.tw,KKBOX&KKTV
+DOMAIN,kktv-theater.kk.stream,KKBOX&KKTV
+DOMAIN,theater-kktv.cdn.hinet.net,KKBOX&KKTV
+
+# > LINE TV
+USER-AGENT,LINE%20TV*,LINE TV
+DOMAIN-SUFFIX,linetv.tw,LINE TV
+DOMAIN,d3c7rimkq79yfu.cloudfront.net,LINE TV
+
+# > myVideo
+USER-AGENT,myVideo*,myVideo
+DOMAIN-SUFFIX,myvideo.net.tw,myVideo
+DOMAIN-SUFFIX,catch.net.tw,myVideo
+DOMAIN,applemediaservice.keydelivery.southeastasia.media.azure.net,myVideo
+DOMAIN,akamaiendpoint-applemediaservice-aase.streaming.media.azure.net,myVideo

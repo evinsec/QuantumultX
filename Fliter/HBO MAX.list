@@ -1,0 +1,9 @@
+# > HBO MAX
+USER-AGENT,HBOMAX*,HBO MAX
+DOMAIN-SUFFIX,hbo.com,HBO MAX
+DOMAIN-SUFFIX,hbonow.com,HBO MAX
+DOMAIN-SUFFIX,hbomax.com,HBO MAX
+DOMAIN-SUFFIX,hbomaxcdn.com,HBO MAX
+DOMAIN,wmff.warnermediacdn.com,HBO MAX
+DOMAIN, hbomax-assets.s3.amazonaws.com, HBO MAX
+DOMIAN, hbo.yspsvc-na.net, HBO MAX

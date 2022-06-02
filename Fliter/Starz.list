@@ -1,0 +1,5 @@
+# > Starz
+USER-AGENT,starplay*,Starz
+//DOMAIN-KEYWORD,starz,Starz
+DOMAIN-SUFFIX,starz.com,Starz
+DOMAIN-SUFFIX,imgix.net,Starz

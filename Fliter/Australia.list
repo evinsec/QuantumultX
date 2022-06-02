@@ -1,0 +1,44 @@
+# > Stan
+USER-AGENT,Stan*,Stan
+DOMAIN-KEYWORD,stan,Stan
+DOMAIN-KEYWORD,streamcott,Stan
+DOMAIN-KEYWORD,streamcoimg,Stan
+DOMAIN-SUFFIX,stan.com.au,Stan
+DOMAIN-SUFFIX,stan.video,Stan
+DOMAIN,lic.drmtoday.com,Stan
+DOMAIN,streamcoimg-a.akamaihd.net,Stan
+DOMAIN,streamcott-a.akamaized.net,Stan
+DOMAIN,streamcott-a.akamaihd.net,Stan
+DOMAIN,456-stan.akamaized.net,Stan
+DOMAIN,401-stan.akamaihd.net,Stan
+
+# > ABC iview
+USER-AGENT,ABC-iview*, ABC iview
+USER-AGENT,ABC%20Listen*, ABC iview
+DOMAIN-SUFFIX,net.au,ABC iview
+DOMAIN-SUFFIX,abcradio.net.au,ABC iview
+DOMAIN-SUFFIX,gigya.com,ABC iview
+DOMAIN-SUFFIX,abc.net.au,ABC iview
+DOMAIN,abc-dn-listen.s3-ap-southeast-2.amazonaws.com,ABC iview
+
+# >9Now
+USER-AGENT,9Now*, 9Now
+DOMAIN-SUFFIX,net.au,9Now
+DOMAIN,static9.net.au,9Now
+DOMAIN-SUFFIX,nine.com.au,9Now
+DOMAIN-SUFFIX,9now.com.au,9Now
+
+# >Binge
+USER-AGENT,Binge*,Binge
+USER-AGENT,platform*,Binge
+USER-AGENT,AppleCoreMedia*,Binge
+DOMAIN-KEYWORD,binge,Binge
+DOMAIN-KEYWORD,strm-akm-ares-vod,Binge
+DOMAIN-SUFFIX,com.au,Binge
+DOMAIN-SUFFIX,binge.com.au,Binge
+DOMAIN-SUFFIX,nr-data.net,Binge
+DOMAIN-SUFFIX,cloudfront.net,Binge
+DOMAIN-SUFFIX,youboranqs01.com,Binge
+DOMAIN,foxsports.campaign.adobe.com,Binge
+DOMAIN,foxsportsau.sc.omtrdc.net,Binge
+DOMAIN,101-strm-akm-ares-vod-b946205c48ce0d9ac214107c25cc2cb1.akamaized.net,Binge

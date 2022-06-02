@@ -1,0 +1,49 @@
+# > ITV Hub
+USER-AGENT,ITV_Player*, ITV Hub
+DOMAIN-KEYWORD,itv,ITV Hub
+DOMAIN-SUFFIX,itv.com,ITV Hub
+DOMAIN,s418.mxcdn.com,ITV Hub
+DOMAIN,europe-west1-itv-ds-prd.cloudfunctions.net,ITV Hub
+
+# > STV
+USER-AGENT,STV%20Player*,STV
+DOMAIN-KEYWORD,stv,STV
+DOMAIN-SUFFIX,stv.tv,STV
+DOMAIN,bcboltstv-a.akamaihd.net,STV
+DOMAIN,uk-dev-stv.videoplaza.tv,STV
+DOMAIN,cf-images.eu-west-1.prod.boltdns.com,STV
+
+# > Channel 4
+USER-AGENT,All4_iOS*, Channel 4
+USER-AGENT,All4*,Channel 4
+DOMAIN-KEYWORD,All4,Channel 4
+DOMAIN-KEYWORD,channel4,Channel 4
+DOMAIN-SUFFIX,c4assets.com,Channel 4
+DOMAIN-SUFFIX,channel4.com,Channel 4
+DOMAIN,fra-01.braze.eu.com,Channel 4
+
+# > Channel 5
+USER-AGENT,my5-mobile-enterprise*, Channel 5
+DOMAIN-KEYWORD,channel5,Channel 5
+DOMAIN-SUFFIX,channel5.com,Channel 5
+DOMAIN, ch5.sc.omtrdc.net,Channel 5
+
+# > BBC
+HOST,vod-dash-ww-live.akamaized.net,BBC
+HOST,vod-thumb-ww-live.akamaized.net,BBC
+HOST-SUFFIX,bbc,BBC
+HOST-SUFFIX,bbc.co,BBC
+HOST-SUFFIX,bbc.co.uk,BBC
+HOST-SUFFIX,bbc.com,BBC
+HOST-SUFFIX,bbc.in,BBC
+HOST-SUFFIX,bbc.net.uk,BBC
+HOST-SUFFIX,bbcchinese.com,BBC
+HOST-SUFFIX,bbci.co,BBC
+HOST-SUFFIX,bbci.co.uk,BBC
+HOST-SUFFIX,bbcmedia.co.uk,BBC
+HOST-SUFFIX,bbcpersian.com,BBC
+HOST-SUFFIX,bbcverticals.com,BBC
+HOST-SUFFIX,bidi.net.uk,BBC
+HOST-KEYWORD,bbcfmt,BBC
+HOST-KEYWORD,uk-live,BBC
+USER-AGENT,BBCiPlayer*,BBC
