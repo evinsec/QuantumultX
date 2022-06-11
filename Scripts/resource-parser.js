@@ -1,5 +1,5 @@
 /** 
-☑️ 资源解析器 ©𝐒𝐡𝐚𝐰𝐧  ⟦2022-06-03 12:20⟧
+☑️ 资源解析器 ©𝐒𝐡𝐚𝐰𝐧  ⟦2022-06-08 09:20⟧
 ----------------------------------------------------------
 🛠 发现 𝐁𝐔𝐆 请反馈: @Shawn_Parser_Bot
 ⛳️ 关注 🆃🅶 相关频道: https://t.me/QuanX_API
@@ -2179,23 +2179,22 @@ function get_emoji(emojip, sname) {
     "🇬🇷": ["Greece","GR","希腊"],
     "🇬🇱": ["Greenland","GL","格陵兰岛","格陵兰"],
     "🇬🇩": ["Grenada","GD","格林纳达"],
+    "🇬🇺": ["Guam","GU","关岛"],
     "🇬🇹": ["Guatemala","GT","危地马拉"],
     "🇬🇬": ["Guernsey","GG","根西岛","根西"],
     "🇬🇳": ["Guinea","GN","几内亚"],
     "🇬🇼": ["Guinea-Bissau","GW","几内亚比绍"],
     "🇬🇾": ["Guyana","GY","圭亚那"],
-    "🇬🇺": ["Guam","GU","关岛"],
     "🇭🇹": ["Haiti","HT","海地"],
     "🇭🇲": ["Heard Island and McDonald Islands","HM","HIMI","赫德岛和麦克唐纳群岛"],
     "🇭🇳": ["Honduras","HN","洪都拉斯"],
-    "🇭🇰": ["Hong Kong","HK","Hongkong", "HongKong", "HONG KONG","香港", "深港", "沪港", "呼港", "HKT", "HKBN", "HGC", "WTT", "CMI", "穗港", "京港"],
+    "🇭🇰": ["Hong Kong","HK", "HONG KONG","香港"],
     "🇭🇺": ["Hungary","HU","匈牙利"],
     "🇮🇸": ["Iceland","IS","冰岛"],
     "🇮🇩": ["Indonesia","ID","印度尼西亚","印尼","雅加达"],
     "🇮🇳": ["India","IN","印度", "孟买", "Mumbai","班加罗尔","新德里","海得拉巴"],
     "🇮🇷": ["Iran","IR","伊朗"],
     "🇮🇶": ["Iraq","IQ","伊拉克"],
-    "🇮🇪": ["Ireland","IRL","爱尔兰","愛爾蘭", "都柏林"],
     "🇮🇲": ["Isle of Man","IM","马恩岛","曼岛"],
     "🇮🇱": ["Israel","IL","以色列"],
     "🇮🇹": ["Italy","IT","意大利"],
@@ -2266,7 +2265,7 @@ function get_emoji(emojip, sname) {
     "🇵🇪": ["Peru","PE","秘鲁"],
     "🇵🇭": ["Philippines","PH","菲律宾","菲律賓"],
     "🇵🇳": ["Pitcairn Islands","PN","皮特凯恩群岛","皮特凯恩"],
-    "🇵🇱": ["Poland","POL","波兰"],
+    "🇵🇱": ["Poland","PL","POL","波兰"],
     "🇵🇹": ["Portugal","PT","葡萄牙"],
     "🇵🇷": ["Puerto Rico","PR","波多黎各","波多黎各自由邦"],
     "🇶🇦": ["Qatar","QA","卡塔尔"],
@@ -2341,6 +2340,7 @@ function get_emoji(emojip, sname) {
     "🇿🇲": ["Zambia","ZM","赞比亚"],
     "🇿🇼": ["Zimbabwe","ZW","津巴布韦"],
     "🇨🇳": ["China","CN","中国","回国","中國", "江苏", "北京", "上海", "广州", "深圳", "杭州", "徐州", "青岛", "宁波", "镇江", "back"],
+    "🇮🇪": ["Ireland","IE","IRL","爱尔兰","愛爾蘭", "都柏林"],
     "🌏": ["亚洲"]
   }
     str1 = JSON.stringify(Lmoji)
@@ -2634,14 +2634,19 @@ function YAMLFix(cnt){
     cnt = cnt.replace(/{|}/g,"").replace(/,/g,"\n   ")
   }
   cnt = cnt.replace(/  -\n.*name/g,"  - name").replace(/\$|\`/g,"").split("proxy-providers:")[0].split("proxy-groups:")[0].replace(/\"(name|type|server|port|cipher|password|)(\"*)/g,"$1")
-  console.log("part-fix:\n"+cnt.split("proxies:")[1])
-  cnt = cnt.indexOf("proxies:") == -1? "proxies:\n" + cnt :"proxies:"+cnt.split("proxies:")[1]
+  // console.log("part-fix:\n"+cnt.split("proxies:")[1])
+  // cnt = cnt.indexOf("proxies:") == -1? "proxies:\n" + cnt :"proxies:"+cnt.split("proxies:")[1]
   cnt = cnt.replace(/name\:(.*?)\:(.*?)\n/gmi,"name:$1冒号$2\n").replace(/\s{6}Host\:/g,"      Host:")//.replace(/\{\s*(Host\:.*)\}/gmi,"$1") //罕见bug情况 修复
   items=cnt.split("\n").map(yamlcheck)
   cnt=items.join("\n")
   //console.log(cnt.replace(/name\:(.*?)\:(.*?)\n/gmi,"name:$1冒号$2"))
   //2022-05-11 增加⬇️
-  cnt = cnt.replace(/\n\s{4}headers/g,"\n      headers").replace(/\n\s{6}(H|h)ost/g,"\n        Host").replace(/\t/g,"")
+  //cnt = cnt.replace(/\n\s{4}headers/g,"\n      headers").replace(/\n\s{6}(H|h)ost/g,"\n        Host").replace(/\t/g,"")
+  //2022-06-07 修改为👇，解决部分无 proxies 字段的
+  cnt = cnt.indexOf("proxies:") != -1?cnt.replace(/\n\s{4}headers/g,"\n      headers").replace(/\n\s{6}(H|h)ost/g,"\n        Host").replace(/\t/g,""):cnt
+  
+  //console.log("part-fix:\n"+cnt.split("proxies:")[1])
+  cnt = cnt.indexOf("proxies:") == -1? "proxies:\n" + cnt :"proxies:"+cnt.split("proxies:")[1]
   console.log("after-fix\n"+cnt)
   //$notify("After-Fix","this is", cnt)
 
