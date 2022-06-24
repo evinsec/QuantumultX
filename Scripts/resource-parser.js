@@ -1,8 +1,9 @@
 /** 
-☑️ 资源解析器 ©𝐒𝐡𝐚𝐰𝐧  ⟦2022-06-11 09:20⟧
+☑️ 资源解析器 ©𝐒𝐡𝐚𝐰𝐧  ⟦2022-06-23 16:30⟧
 ----------------------------------------------------------
-🛠 发现 𝐁𝐔𝐆 请反馈: @Shawn_Parser_Bot
+🛠 发现 𝐁𝐔𝐆 请反馈: https://t.me/Shawn_Parser_Bot
 ⛳️ 关注 🆃🅶 相关频道: https://t.me/QuanX_API
+📖 使用 教程: https://shrtm.nu/4ECS
 🗣 🆃🄷🄰🄽🄺🅂 🆃🄾  @Jamie CHIEN, @M**F**, @c0lada, @Peng-YM, @vinewx, @love4taylor, @shadowdogy 
 
 🤖 主要功能: 
@@ -14,7 +15,7 @@
 ☑︎ 𝐒𝐮𝐫𝐠𝐞/𝐂𝐥𝐚𝐬𝐡 类型规则 𝗹𝗶𝘀𝘁 与 模块 𝐦𝐨𝐝𝐮𝐥𝐞 的解析使用
 ----------------------------------------------------------
 0️⃣ 在 ⟦订阅链接⟧ 后加 "#" 使用, 不同参数用 "&" 连接 
-⚠️ ☞ “你的订阅连接”#emoji=1&tfo=1&in=香港+台湾
+⚠️ ☞ "你的订阅连接#emoji=1&tfo=1&in=香港+台湾"
 ❖ 本地资源片段引用, 请将参数如 "#in=xxx&out=yyy" 填入资源片段的第 ① 行
 ❖ 🚦 支持中文, "操作" 以下特殊字符时请先替换(URL-Encode) 🚦
   ∎ "+"⇒"%2B", 空格⇒"%20", "@"⇒"%40", "&"⇒"%26", "."⇒"\.", ","⇒"%2C"
@@ -36,6 +37,17 @@
   ❖ 默认 emoji 先生效, 如想调换顺序, 请用 rrname 参数
 ⦿ replace 正则替换节点中字段, 可用于重命名/更改加密方式等
   ❖ replace=regex1@𝘀𝘁𝗿1+regex2@𝘀𝘁𝗿2
+⦿ ptn/npt=1-8, 将节点名英文/数字替换成样式 ⇒ 🅰/🄰/𝐀/𝗮/𝔸/𝕒/ᵃ/ᴬ, ①\❶\⓵\𝟙\¹\₁\𝟏\𝟷
+⦿ delreg, 利用正则表达式来删除 "节点名" 中的字段(⚠️ 慎用)
+⦿ aead=-1, 关闭 Vmess 的 AEAD 参数
+⦿ host=xxx , 修改 host 参数（如有）
+⦿ checkurl=xxx , 指定server_check_url 参数
+⦿ sort=1/-1/x/参数规则, 按节点名 正/逆/随机/参数规则 排序
+  ❖ 参数规则是正则表达式或简单关键词, 用"<" 或 ">" 连接
+  ❖ sort=🇭🇰>🇸🇬>🇯🇵>🇺🇸 , 靠前排序
+  ❖ sort=IEPL<IPLC<BGP , 靠后排序
+⦿ info=1, 开启通知提示机场 ✈️ 流量信息(如有提供);
+⦿ flow=2022-06-02:1000:54, 订阅到期时间:总流量:已用流量
 ⦿ 占位符，可用于 rename/replace 等操作
   ❖ $type0/1/2/3/4/5/6/7 占位符，将节点类型(ss/ssr/vmess 等)作为可操作参数，如
     ∎ rename=@|$type2
@@ -48,19 +60,6 @@
   ❖ $tag 占位符，将订阅的 tag 作为可操作参数，如
     ∎ 可接数字以单独给 tag 添加字母/数字样式
     ∎ rename=@「$tag34」, 样式同下边的 ptn/npt
-⦿ ptn=1-8, 将节点名英文替换成样式 ⇒ 🅰/🄰/𝐀/𝗮/𝔸/𝕒/ᵃ/ᴬ
-⦿ npt=1-8, 将节点名数字替换成样式 ⇒ ①\❶\⓵\𝟙\¹\₁\𝟏\𝟷
-⦿ delreg, 利用正则表达式来删除 "节点名" 中的字段(⚠️ 慎用)
-⦿ aead=-1, 关闭 Vmess 的 AEAD 参数
-⦿ host=xxx , 修改 host 参数（如有）
-⦿ checkurl=xxx , 指定server_check_url 参数
-⦿ sort=1/-1/x/参数规则, 按节点名 正/逆/随机/参数规则 排序
-  ❖ 参数规则是正则表达式或简单关键词, 用"<" 或 ">" 连接
-  ❖ sort=🇭🇰>🇸🇬>🇯🇵>🇺🇸 , 靠前排序
-  ❖ sort=IEPL<IPLC<BGP , 靠后排序
-⦿ info=1, 开启通知提示机场 ✈️ 流量信息(如有提供);
-⦿ del=1, 有重名节点时用此参数删除重复节点(默认改名保留)
-⦿ flow=2022-06-02:1000:54, 订阅到期时间:总流量:已用流量
 ⦿ ⟦进阶参数⟧: 𝘀𝗳𝗶𝗹𝘁𝗲𝗿/𝘀𝗿𝗲𝗻𝗮𝗺𝗲, 传入一段 base64 编码的脚本, 可用于更为复杂的[过滤/重命名] 需求
   ❖ 说明: https://github.com/KOP-XIAO/QuantumultX/pull/9
 
@@ -169,7 +168,8 @@ var Pemoji = mark0 && para1.indexOf("emoji=") != -1 ? para1.split("emoji=")[1].s
 var Pdbg = mark0 && para1.indexOf("dbg=") != -1 ? para1.split("dbg=")[1].split("&")[0] : null;
 var Pudp0 = mark0 && para1.indexOf("udp=") != -1 ? para1.split("udp=")[1].split("&")[0] : 0;
 var Ptfo0 = mark0 && para1.indexOf("tfo=") != -1 ? para1.split("tfo=")[1].split("&")[0] : 0;
-var Prname = mark0 && para1.indexOf("rename=") != -1 ? para1.split("rename=")[1].split("&")[0].split("+") : null;
+//var Prname = mark0 && para1.indexOf("rename=") != -1 ? para1.split("rename=")[1].split("&")[0].split("+") : null;
+var Prname = mark0 && /(^|\&)rename=/.test(para1) ? para1.split(/(^|\&)rename\=/)[2].split("&")[0].split("+") : null;
 var Psrename = mark0 && para1.indexOf("srename=") != -1 ? Base64.decode(para1.split("srename=")[1].split("&")[0]) : null; // script rename
 var Prrname = mark0 && para1.indexOf("rrname=") != -1 ? para1.split("rrname=")[1].split("&")[0].split("+") : null;
 var Psuffix = mark0 && para1.indexOf("suffix=") != -1 ? para1.split("suffix=")[1].split("&")[0] : 0;
@@ -386,6 +386,8 @@ function ResourceParse() {
       delreg = Pregdel
       total = total.map(DelReg)
     }
+    //script rename 置于其它参数之前
+    if (Psrename) { total = RenameScript(total, Psrename) }
     if (Preplace) { // server 类型也可用 replace 参数进行重命名操作
       total = ReplaceReg(total, Preplace)
     }
@@ -393,7 +395,6 @@ function ResourceParse() {
       Prn = Prname;
       total = total.map(Rename);
     }
-    if (Psrename) { total = RenameScript(total, Psrename) }
     if (total.length > 0){
       if (Psuffix==1 || Psuffix==-1) {total = Psuffix == 1? total.map(type_suffix):total.map(type_prefix)
       }
@@ -733,10 +734,13 @@ function index_handle(item) {
   let b=Array.from(new Array(items.length),(val,index)=>index+1);
   //console.log(b[0])
   for (var i=0; i< items.length;i++){
+    //$notify("rename"+i,Prname,items[i])
+    if (items[i].indexOf("node_index_prefix") != -1) { // 以免占位符被错误地replace
     ind = items[i].split("node_index_prefix")[1][0]
     ind = !/^(0|1|2|3|4|5|6|7|8)$/.test(ind) ? 0 : ind
     console.log("handle index"+ind)
     items[i] = items[i].replace(/node_index_prefix(\d{0,1})/g,PatternN((i+1).toString(),"",ind))
+  }
   }
   console.log(items)
   return items
@@ -1284,7 +1288,7 @@ function Subs2QX(subs, Pudp, Ptfo, Pcert0, PTls13) {
             const NodeCheck = (item) => listi.toLowerCase().indexOf(item) != -1;
             const NodeCheck1 = (item) => listi.toLowerCase().indexOf(item) == 0;
             try {
-                if (type == "vmess" && list0[i].indexOf("remarks=") == -1) {
+                if (type == "vmess" && (list0[i].indexOf("remark=") == -1 && list0[i].indexOf("remarks=") == -1)) {
                     var bnode = Base64.decode(list0[i].split("vmess://")[1])
                     if (bnode.indexOf("over-tls=") == -1) { //v2rayN
                         node = V2QX(list0[i], Pudp, Ptfo, Pcert0, PTls13)
@@ -1292,7 +1296,7 @@ function Subs2QX(subs, Pudp, Ptfo, Pcert0, PTls13) {
                         node = VQ2QX(list0[i], Pudp, Ptfo, Pcert0, PTls13)
                     }
                   node = tag0 != "" ? URI_TAG(node, tag0) : node
-                } else if (type == "vmess" && list0[i].indexOf("remarks=") != -1) { //shadowrocket 类型
+                } else if (type == "vmess" && ( list0[i].indexOf("remark=") != -1 || list0[i].indexOf("remarks=") != -1)) { //shadowrocket 类型
                     node = VR2QX(list0[i], Pudp, Ptfo, Pcert0, PTls13)
                     node = tag0 != "" ? URI_TAG(node, tag0) : node
                 } else if (type == "socks" && list0[i].indexOf("remarks=") != -1) { //shadowrocket socks5 类型
@@ -1385,9 +1389,10 @@ function QX_TLS(cnt,Pcert0,PTls13) {
   cnt =cnt.replace(/tag\s*\=/gm,"tag=") //
   var cert0 = Pcert0 == 1? "tls-verification=true, " : "tls-verification=false, "
   var tls13 = PTls13 == 1? "tls13=true, " : ""
-  if(cnt.indexOf("tls-verification") != -1){
-    cnt = cnt.replace(RegExp("tls\-verification.*?\,", "gmi"), cert0)
-  }else if(cnt.indexOf("obfs=over-tls")!=-1 || /over\-tls\s*\=\s*true/.test(cnt) || cnt.indexOf("obfs=wss")!=-1){
+  if(cnt.indexOf("tls-verification") != -1){ // 已有tls参数时, 如用户不指定，则不做处理
+    cnt = (Pcert0 == -1 || Pcert0 == 1) ? cnt.replace(RegExp("tls\-verification.*?\,", "gmi"), cert0): cnt
+    //cnt = Pcert0 == 1? cnt.replace(RegExp("tls\-verification.*?\,", "gmi"), cert0): cnt
+  }else if(cnt.indexOf("obfs=over-tls")!=-1 || /over\-tls\s*\=\s*true/.test(cnt) || cnt.indexOf("obfs=wss")!=-1){ //未包含tls参数时
     cnt = cnt.replace(new RegExp("tag.*?\=", "gmi"), cert0+"tag=")
   }
   if (tls13 !="") {
@@ -1487,27 +1492,26 @@ function VQ2QX(subs, Pudp, Ptfo, Pcert0, PTls13) {
 
 //Shadowrocket 格式的 vmess URI 转换
 function VR2QX(subs, Pudp, Ptfo, Pcert0, PTls13) {
-  var server = String(Base64.decode(subs.replace("vmess://", "").split("?remarks")[0]).trim()).split("\u0000")[0]
+  var server = String(Base64.decode(subs.replace("vmess://", "").split("?remark")[0].split("&remark")[0].split("?")[0]).trim()).split("\u0000")[0]
   var node = ""
   var ip = "vmess=" + server.split("@")[1] + ", " + "method=aes-128-gcm, " + "password=" + server.split("@")[0].split(":")[1] + ", "
-  var tag = "tag=" + decodeURIComponent(subs.split("remarks=")[1].split("&")[0])
+  var tag = "tag=" + decodeURIComponent(subs.split(/remarks*=/)[1].split("&")[0])
   var tfo = subs.indexOf("tfo=1") != -1 ? "fast-open=true, " : "fast-open=false, "
   var udp = Pudp == 1 ? "udp-relay=false, " : "udp-relay=false, ";
   node = ip + tfo + udp
-  var obfs = subs.split("obfs=")[1].split("&")[0]
+  var obfs = subs.split("obfs=")[1].split("&")[0].trim()
   if (obfs == "none") { //
     obfs = subs.indexOf("tls=1") != -1 ? "obfs=over-tls, " : "" //over-tls
   } else if (obfs == "websocket" || obfs == "http") {
-    console.log(obfs)
     obfs = obfs == "http" ? "obfs=http, " : "obfs=ws, " // http 类型
     obfs = subs.indexOf("tls=1") != -1 ? "obfs=wss, " : obfs //ws,wss 类型
-    var ouri = subs.indexOf("&path=") != -1 ? subs.split("&path=")[1].split("&")[0] : "/" //ws,wss 类型
+    var ouri = subs.indexOf("&path=") != -1 ? decodeURIComponent(subs.split("&path=")[1].split("&")[0]) : "/" //ws,wss 类型
     obfs = obfs + "obfs-uri=" + ouri + ", "
-    var host = subs.indexOf("&obfsParam=") != -1 ? decodeURIComponent(subs.split("&obfsParam=")[1].split("&")[0]) : ""
+    var host = subs.indexOf("&obfsParam=") != -1 ? decodeURIComponent(subs.split("&obfsParam=")[1].split("&")[0].split("\n")[0]).split("\n")[0].trim() : ""
     if (host.indexOf("\"Host\"")!=-1 && host.indexOf("{")!=-1) {
       host = JSON.parse(host)["Host"]
     }
-    host = host!="{}"? "obfs-host=" + host + ", " : ""
+    host = host!="{}" && host ? "obfs-host=" + host + ", " : ""
     obfs = obfs + host
   }
   if (obfs.indexOf("obfs=over-tls") != -1 || obfs.indexOf("obfs=wss") != -1) {
@@ -1515,10 +1519,12 @@ function VR2QX(subs, Pudp, Ptfo, Pcert0, PTls13) {
     var tls13 = PTls13 == 1 ? "tls13=true, " : ""
     obfs = obfs + cert + tls13
   }
+  caead="aead=false, "
   if (subs.indexOf("alterId=") != -1) {
     caead = Number(subs.split("alterId=")[1].split("&")[0]) != 0 ? "aead=false, " : ""
   }
   node = node + obfs +caead+ tag
+  //$notify(node)
   return node
 }
 
@@ -2188,7 +2194,7 @@ function get_emoji(emojip, sname) {
     "🇭🇹": ["Haiti","HT","海地"],
     "🇭🇲": ["Heard Island and McDonald Islands","HM","HIMI","赫德岛和麦克唐纳群岛"],
     "🇭🇳": ["Honduras","HN","洪都拉斯"],
-    "🇭🇰": ["Hong Kong","HK", "HONG KONG","香港"],
+    "🇭🇰": ["Hong Kong","HK","Hongkong", "HongKong", "HONG KONG","香港", "深港", "沪港", "呼港", "HKT", "HKBN", "HGC", "WTT", "CMI", "穗港", "京港"],
     "🇭🇺": ["Hungary","HU","匈牙利"],
     "🇮🇸": ["Iceland","IS","冰岛"],
     "🇮🇩": ["Indonesia","ID","印度尼西亚","印尼","雅加达"],
