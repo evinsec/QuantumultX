@@ -31,7 +31,6 @@ DOMAIN-SUFFIX,9now.com.au,9Now
 # >Binge
 USER-AGENT,Binge*,Binge
 USER-AGENT,platform*,Binge
-USER-AGENT,AppleCoreMedia*,Binge
 DOMAIN-KEYWORD,binge,Binge
 DOMAIN-KEYWORD,strm-akm-ares-vod,Binge
 DOMAIN-SUFFIX,com.au,Binge
