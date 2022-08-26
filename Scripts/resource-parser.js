@@ -2205,7 +2205,8 @@ function emoji_del(str) {
 
 //为节点名添加 emoji
 function get_emoji(emojip, sname) {
-    "🏳️‍🌈": ["流量", "时间", "应急", "过期", "Bandwidth", "expire"],
+   var Lmoji = { 
+    "🏳️‍🌈": ["流量", "套餐", "剩余", "重置", "到期" , "时间", "应急", "过期", "Bandwidth", "expire", "Traffic", "traffic"],
     "🇦🇫": ["Afghanistan","AF","阿富汗"],
     "🇦🇽": ["Åland Islands","AX","奥兰群岛"],
     "🇦🇱": ["Albania","AL","阿尔巴尼亚"],
