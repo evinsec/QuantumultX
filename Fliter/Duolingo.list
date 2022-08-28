@@ -1,5 +1,7 @@
 # > Duolingo
 USER-AGENT,DuolingoMobile*,Duolingo
 DOMAIN-KEYWORD,duolingo,Duolingo
+DOMAIN-KEYWORD,unity,Duolingo
 DOMAIN-SUFFIX,duolingo.com,Duolingo
 DOMAIN-SUFFIX,duolingo.cn,Duolingo
+DOMAIN-SUFFIX,unity.com,Duolingo
