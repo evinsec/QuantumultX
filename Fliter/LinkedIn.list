@@ -1,5 +1,7 @@
 # > LinkedIn
-USER-AGENT,Tinder*, LinkedIn
+USER-AGENT,LinkedIn*,LinkedIn
 DOMAIN-KEYWORD,linkedin,LinkedIn
 DOMAIN-SUFFIX,linkedin.com,LinkedIn
 DOMAIN-SUFFIX,licdn.com,LinkedIn
+DOMAIN-SUFFIX,linkedin.cn,LinkedIn
+DOMAIN-SUFFIX,licdn.cn,LinkedIn
