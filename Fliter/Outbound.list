@@ -379,3 +379,18 @@ DOMAIN,wego.here.com,PROXY
 # > Alphabet
 DOMAIN-SUFFIX,go.dev,PROXY
 DOMAIN-SUFFIX,golang.org,PROXY
+
+# > WebComics
+USER-AGENT,WebComics*,PROXY
+DOMAIN-KEYWORD,webcomicsapp,PROXY
+DOMAIN-SUFFIX,webcomicsapp.com,PROXY
+DOMAIN-SUFFIX,mangaina.com,PROXY
+
+# > WebComics
+USER-AGENT,WebComics*,PROXY
+USER-AGENT,Scruff*,PROXY
+DOMAIN-KEYWORD,webcomicsapp,PROXY
+DOMAIN-KEYWORD,scruff,PROXY
+DOMAIN-SUFFIX,webcomicsapp.com,PROXY
+DOMAIN-SUFFIX,mangaina.com,PROXY
+DOMAIN-SUFFIX,scruffsapp.com,PROXY
