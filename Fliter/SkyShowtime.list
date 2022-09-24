@@ -1,0 +1,4 @@
+# > SkyShowtime
+USER-AGENT,SkyShowtimeIOS*,SkyShowtime
+DOMAIN-SUFFIX,skyshowtime.com,SkyShowtime
+DOMAIN-KEYWORD,skyshowtime,SkyShowtime
