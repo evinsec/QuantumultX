@@ -1,5 +1,5 @@
 /** 
-☑️ 资源解析器 ©𝐒𝐡𝐚𝐰𝐧  ⟦2022-08-26 16:30⟧
+☑️ 资源解析器 ©𝐒𝐡𝐚𝐰𝐧  ⟦2022-11-25 13:30⟧
 ----------------------------------------------------------
 🛠 发现 𝐁𝐔𝐆 请反馈: https://t.me/Shawn_Parser_Bot
 ⛳️ 关注 🆃🅶 相关频道: https://t.me/QuanX_API
@@ -41,6 +41,8 @@
 ⦿ delreg, 利用正则表达式来删除 "节点名" 中的字段(⚠️ 慎用)
 ⦿ aead=-1, 关闭 Vmess 的 AEAD 参数
 ⦿ host=xxx, 修改已有 host , 如要增加host，请用☠️结尾
+⦿ obfs=vhttp/shttp, 指定 obfs=shadowsocks-http 或 obfs=vmess-http 的特殊需求
+⦿ tsession=0/1/2, 0/1 代表关闭 tls-session-ticket/reuse，2 表示全部关闭
 ⦿ checkurl=xxx , 指定 server_check_url 参数
 ⦿ sort=1/-1/x/参数规则, 按节点名 正/逆/随机/参数规则 排序
   ❖ 参数规则是正则表达式或简单关键词, 用"<" 或 ">" 连接
@@ -77,7 +79,7 @@
   ❖ 将淘宝比价中脚本替换成 lite 版本(如有此版本的脚本)
     ∎ replace=(price)(.*)@$1_lite$2
 ⦿ dst=rewrite/filter，分别为将 𝐦𝐨𝐝𝐮𝐥𝐞&𝗿𝘂𝗹𝗲-𝘀𝗲𝘁 转换成 重写/分流;
-  ❖ ⚠️ 默认将 𝐦𝐨𝐝𝐮𝐥𝐞 转换到重写, 𝗿𝘂𝗹𝗲-𝘀𝗲𝘁 转成分流
+  ❖ ⚠️ 默认将 𝐦𝐨𝐝𝐮𝐥𝐞 转换到重写, 𝗿𝘂𝗹𝗲-�𝗲𝘁 转成分流
   ❖ ⚠️ 把 𝗿𝘂𝗹𝗲-𝘀𝗲𝘁 中 url-regex 转成重写时, 必须要加 dst=rewrite;
   ❖ ⚠️ 把 𝐦𝐨𝐝𝐮𝐥𝐞 中的分流规则转换时, 必须要加 dst=filter
 ⦿ cdn=1, 将 github 脚本的地址转换成免翻墙 fastly.jsdelivr.net/gh
@@ -89,7 +91,7 @@
 ⦿ 通知参数 ntf=0/1, 用于 关闭/打开 资源解析器的提示通知
   ❖ 𝗿𝗲𝘄𝗿𝗶𝘁𝗲/𝗳𝗶𝗹𝘁𝗲𝗿 默认“开启”通知提示, 以防规则误删除
   ❖ 𝘀𝗲𝗿𝘃𝗲𝗿 资源解析则默认”关闭“通知提示
-⦿ 类型参数 type=domain-set/rule/module/list/nodes
+⦿ 类型参数� type=domain-set/rule/module/list/nodes
   ❖ 当解析器未能正确识别类型时, 可尝试使用此参数强制指定
 ⦿ 隐藏参数 hide=0, 禁用筛除的分流/重写，默认方式为删除
 ⦿ profile=111 , URL-Scheme 添加 QuanX 类型配置中远程资源
@@ -156,7 +158,7 @@ SubFlow() //流量通知
 
 // 参数获取
 var Pin0 = mark0 && para1.indexOf("in=") != -1 ? (para1.split("in=")[1].split("&")[0].split("+")).map(decodeURIComponent) : null;
-var Pout0 = mark0 && para1.indexOf("out=") != -1 ? (para1.split("out=")[1].split("&")[0].split("+")).map(decodeURIComponent) : null;
+var Pout0 = mark0 && (para.indexOf("#out=") != -1 || para.indexOf("&out=") != -1)? ((para.indexOf("#out=")!=-1? para.split("#out="): para.split("&out="))[1].split("&")[0].split("+")).map(decodeURIComponent) : null;
 var Psfilter = mark0 && para1.indexOf("sfilter=") != -1 ? Base64.decode(para1.split("sfilter=")[1].split("&")[0]) : null; // script filter
 var Preg = mark0 && para1.indexOf("regex=") != -1 ? decodeURIComponent(para1.split("regex=")[1].split("&")[0]).replace(/\，/g,",") : null; //server正则过滤参数
 var Pregout = mark0 && para1.indexOf("regout=") != -1 ? decodeURIComponent(para1.split("regout=")[1].split("&")[0]).replace(/\，/g,",") : null; //server正则删除参数
@@ -198,7 +200,7 @@ var typeU = mark0 && para1.indexOf("type=") != -1 ? para1.split("type=")[1].spli
 var Pfcr = mark0 && para1.indexOf("fcr=") != -1 ? para1.split("fcr=")[1].split("&")[0] : ""; // force-cellular 等参数
 var Pvia = mark0 && para1.indexOf("via=") != -1 ? para1.split("via=")[1].split("&")[0] : ""; // via-interface 参数
 var Paead = mark0 && para1.indexOf("aead=") != -1 ? para1.split("aead=")[1].split("&")[0] : ""; // vmess aead 参数
-var Phost = mark0 && para1.indexOf("host=") != -1 ? para1.split("host=")[1].split("&")[0] : ""; // host 混淆参数
+var Phost = mark0 && ( para.indexOf("#host=") != -1 || para.indexOf("&host=") != -1) ? (para.indexOf("#host=")!=-1? para.split("#host="): para.split("&host="))[1].split("&")[0] : ""; // host 混淆参数
 var Pcsha256 = mark0 && para1.indexOf("csha=") != -1 && version >= 646? para1.split("csha=")[1].split("&")[0] : ""; // cert-sha256 混淆参数
 var Ppsha256 = mark0 && para1.indexOf("psha=") != -1 && version >= 646? para1.split("psha=")[1].split("&")[0] : ""; // pubkey-sha256 混淆参数
 var typeQ = $resource.type? $resource.type:"unsupported"   //返回 field 类型参数
@@ -210,7 +212,11 @@ var typec="" //check result type
 var Pflow=mark0 && para1.indexOf("flow=") != -1 ? para1.split("flow=")[1].split("&")[0] : 0; // 流量时间等参数
 var PProfile = mark0 && para1.indexOf("profile=") != -1 ? para1.split("profile=")[1].split("&")[0] : 0; // 通过URL-Scheme导入完整配置参数
 var Palpn = mark0 && para1.indexOf("alpn=") != -1 && version >= 712? para1.split("alpn=")[1].split("&")[0] : ""; // over-tls 类型，alpn参数
+var Pobfs = mark0 && para1.indexOf("obfs=") != -1 && version >= 770? para1.split("obfs=")[1].split("&")[0] : ""; // 指定特殊情况下的 obfs=xx-http 类型
+var Psession =  mark0 && para1.indexOf("tsession=") != -1 && version >= 771? para1.split("tsession=")[1].split("&")[0] : "";//tls-no-session-ticket and tls-no-session-reuse
+// 0/1 代表关闭 session-ticket/reuse，2 表示全部关闭。
 
+var RegoutList= [] ;//用于 regout参数删选提醒
 // URL-Scheme 增加配置
 var ADDres = `quantumult-x:///add-resource?remote-resource=url-encoded-json`
 var RLink = `{
@@ -547,10 +553,10 @@ function Type_Check(subs) {
     var QuanXK = ["shadowsocks=", "trojan=", "vmess=", "http=", "socks5="];
     var SurgeK = ["=ss,", "=vmess,", "=trojan,", "=http,", "=custom,", "=https,", "=shadowsocks", "=shadowsocksr", "=sock5", "=sock5-tls"];
     var ClashK = ["proxies:"]
-    var SubK = ["dm1lc3M", "c3NyOi8v", "CnNzOi8", "dHJvamFu", "c3M6Ly", "c3NkOi8v", "c2hhZG93", "aHR0cDovLw", "aHR0cHM6L", "CnRyb2phbjo", "aHR0cD0", "aHR0cCA"];
+    var SubK = ["dm1lc3M", "c3NyOi8v", "CnNzOi8", "dHJvamFu", "c3M6Ly", "c3NkOi8v", "c2hhZG93", "aHR0cDovLw", "aHR0cHM6L", "CnRyb2phbjo", "aHR0cD0", "aHR0cCA","U1RBVFVT"];
     var RewriteK = [" url 302", " url 307", " url reject", " url script", " url req", " url res", " url echo"] // quantumult X 类型 rewrite
     var SubK2 = ["ss://", "vmess://", "ssr://", "trojan://", "ssd://", "https://", "http://","socks://","ssocks://"];
-    var ModuleK = ["[Script]", "[Rule]", "[URL Rewrite]", "[Map Local]", "[MITM]", "\nhttp-r"]
+    var ModuleK = ["[Script]", "[Rule]", "[URL Rewrite]", "[Map Local]", "\nhttp-r", "script-path"]
     var QXProfile = ["[filter_local]","[filter_remote]","[server_local]","[server_remote]"]
     var html = "DOCTYPE html"
     var subi = subs.replace(/ /g, "")
@@ -558,37 +564,38 @@ function Type_Check(subs) {
     const NodeCheck = (item) => subi.toLowerCase().indexOf(item.toLowerCase()) != -1;
     const NodeCheck1 = (item) => subi.toLowerCase().indexOf(item.toLowerCase()) != -1; //b64加密的订阅类型
     const NodeCheck2 = (item) => subi.toLowerCase().indexOf(item.toLowerCase()) != -1; //URI 类型
-    const RewriteCheck = (item) => ( subs.indexOf(item) != -1) ;
+    const RewriteCheck = (item) => subs.indexOf(item) != -1 ; // quanx 重写判定
     const ProfileCheck = (item) => subs.indexOf(item) != -1; //是否为quanx配置文件
     var subsn = subs.split("\n")
     if ( (subs.indexOf(html) != -1 || subs.indexOf("doctype html") != -1) && link0.indexOf("github.com" == -1)) {
       $notify("‼️ 该链接返回为无效网页内容"+ " ➟ " + "⟦" + subtag + "⟧", "⁉️ 点通知跳转以确认链接是否失效\n"+link0, "返回内容如下⬇️：\n"+subs, nan_link);
       type = "web";
-    } else if (typeU == "nodes" ) { //指定为节点类型
-      type = (typeQ == "unsupported" || typeQ =="server")? "Subs-B64Encode":"wrong-field"
+    } else if (typeU == "nodes" && typeQ=="server") { //指定为节点类型
+      type = (typeQ == "unsupported" || typeQ =="server")? "Subs":"wrong-field"
     } else if (ClashK.some(NodeCheck) || typeU == "clash"){ // Clash 类型节点转换
       type = (typeQ == "unsupported" || typeQ =="server")? "Clash":"wrong-field";
       typec = "server"
       content0 = Clash2QX(subs)
-    } else if ((/^hostname\s*\=|pattern\=/.test(subi) || RewriteK.some(RewriteCheck))  && para1.indexOf("dst=filter")==-1 && subi.indexOf("securehostname") == -1 && !/module|nodes|rule/.test(typeU) && !(RuleK.some(RuleCheck) && typeQ == "filter")) {
-      // 2022-07-20 remove constrain && !/\[(Proxy|filter_local)\]/.test(subs)
-      typec = "rewrite"
-      type = (typeQ == "unsupported" || typeQ =="rewrite")? "rewrite":"wrong-field" //Quantumult X 类型 rewrite/ Surge Script/
     } else if ( (((ModuleK.some(RewriteCheck) || para1.indexOf("dst=rewrite") != -1) && (para1.indexOf("dst=filter") == -1) && subs.indexOf("[Proxy]") == -1) || typeU == "module") && typeU != "nodes" && typeU != "rule" && typeQ !="filter") { // Surge 类型 module /rule-set(含url-regex) 类型
       typec="rewrite"
       type = (typeQ == "unsupported" || typeQ =="rewrite")? "sgmodule" : "wrong-field"
+    } else if ((/(^hostname|\nhostname)\s*\=/.test(subi) || RewriteK.some(RewriteCheck))  && para1.indexOf("dst=filter")==-1 && subi.indexOf("securehostname") == -1 && !/module|nodes|rule/.test(typeU) && !(RuleK.some(RuleCheck) && typeQ == "filter") && !(typeQ!= "rewrite" && QXProfile.some(ProfileCheck))) {
+      // 2022-07-20 remove constrain && !/\[(Proxy|filter_local)\]/.test(subs)
+      typec = "rewrite"
+      type = (typeQ == "unsupported" || typeQ =="rewrite")? "rewrite":"wrong-field" //Quantumult X 类型 rewrite/ Surge Script/
     } else if (((RuleK.some(RuleCheck) && subs.indexOf(html) == -1 ) || typeU == "rule" || para1.indexOf("dst=filter")!=-1) && typeU != "nodes" && !(typeQ == "server" && (QuanXK.some(NodeCheck) || SurgeK.some(NodeCheck))) ) {
       // rule/filter类型
       // 2022-07-20 remove constrain && !/\[(Proxy|server_local)\]/.test(subs) adter html
       typec = "filter"
       type = (typeQ == "unsupported" || typeQ =="filter")? "Rule":"wrong-field";
     } else if (typeU == "domain-set") {// 仅限用户指定为 domain-set；((DomainK.some(RuleCheck) || typeU == "domain-set") && subs.indexOf("[Proxy]") == -1 && typeU != "nodes") {
-      typec = "filter"
+      typec = "filter-domain-set"
       type = (typeQ == "unsupported" || typeQ =="filter")? "Rule":"wrong-field";
       content0 = Domain2Rule(content0) // 转换 domain-set
     } else if (typeQ == "filter") { // 纯 list类型？
-      typec = "filter"
+      typec = "filter-list"
       type = (typeQ == "unsupported" || typeQ =="filter")? "Rule":"wrong-field";
+      content0 = content0.split("\n").map(rule_list_handle).join("\n")
     } else if (subsn.length >= 1 && SubK2.some(NodeCheck2) && !/\[(Proxy|filter_local)\]/.test(subs)) { //未b64加密的多行URI 组合订阅
       typec = "server"
       type= (typeQ == "unsupported" || typeQ =="server" || typeQ =="uri") ? "Subs":"wrong-field"
@@ -906,6 +913,35 @@ function HOST_Handle(cnt,phost) {
   return cnt
 }
 
+// 指定节点 obfs=xx-http 参数
+function OBFS_Handle(cnt,pobfs) {
+  if (pobfs == "shttp") {
+    pobfs="obfs="+"shadowsocks-http"
+  } else if (pobfs == "vhttp") {
+    pobfs="obfs="+"vmess-http"
+  } else { 
+    pobfs="invalid"
+  }
+  if (/obfs\s*\=\s*http/.test(cnt) && pobfs!="invalid") { //只替换有 obfs=http 参数
+    cnt = cnt.replace(/obfs\s*\=\s*http/,pobfs)
+  }
+  return cnt
+}
+
+// 指定节点 tls-no-session-ticket/reuse 参数
+function Session_Handle(cnt,psession) {
+  let st = ", tls-no-session-ticket=true"
+  let sr = ", tls-no-session-reuse=true"
+  if (psession == 0) {
+    cnt =cnt + st
+  } else if (psession == 1) {
+     cnt =cnt + sr
+  } else if (psession == 2){ 
+    cnt =cnt + st + sr
+  }
+  return cnt
+}
+
 // 指定 cert-sha256 pubkey-sha256 参数
 function SHA256_Handle(cnt,pcsha256,ppsha256) {
   if (cnt.indexOf("over-tls=true")!=-1 || cnt.indexOf("obfs=wss")!=-1) {
@@ -940,7 +976,7 @@ function URX2QX(subs) {
             rw = subs[i].replace(/ /g, "").split(",REJECT")[0].split("GEX,")[1] + " url " + "reject-200"
             nrw.push(rw)
         } else if (subs[i].indexOf("data=") != -1 && subs.indexOf("[Map Local]") != -1){ // Map Local 类型
-            rw = subs[i].replace(/ /g, "").split("data=")[0] + " url " + "reject-dict"
+            rw = subs[i].replace(/ /g, "").split("data=")[0].replace(/\"/g,"") + " url echo-response text/html echo-response " + subs[i].replace(/ /g, "").split("data=")[1].replace(/\"/g,"")//"reject-dict"
             nrw.push(rw)
         } 
     }
@@ -984,11 +1020,15 @@ function SCP2QX(subs) {
             rw = ptn + " url " + type + js
             nrw.push(rw)
           }
-        } else if (/\s30(7|2)$/.test(subs[i])) { //rewrite 302&307 复写
+        } else if (/\s30(7|2)$/.test(subs[i])) { //rewrite 302&307 复写(Surge)
           //tpe = subs[i].indexOf(" 302") != -1? "302":"307"
           //$notify("307/2",subs[i])
           rw = subs[i].split(" ")[0] + " url " + subs[i].split(" ")[2] + " " + subs[i].split(" ")[1].trim()
           //if(rw.indexOf("307")!=-1) {$notify("XX",subs[i],rw.split(" "))}
+          nrw.push(rw)
+        } else if (/\s\-\s30(2|7)\s/.test(subs[i])) { //rewrite 302&307 复写(Shadowrocket)
+          //xx - 302 $1$2$3
+          rw = subs[i].replace(" - "," url ")
           nrw.push(rw)
         } else if(subs[i].split(" ")[2] == "header") { // rewrite header 类型
           var pget = subs[i].split(" ")[0].split(".com")[1]
@@ -1002,8 +1042,11 @@ function SCP2QX(subs) {
           var pgetn = subs[i].split("header-replace")[1].trim()
           rw = subs[i].split(" ")[0] + " url request-header " +"(.+\\r\\n)"+pget+":.+(\\r\\n) request-header " + "$1" + pgetn + "$2"
           nrw.push(rw)
-        } else if(subs[i].indexOf(" - reject") != -1) { // rewrite reject 类型
+        } else if(subs[i].indexOf(" _ reject") != -1) { // rewrite reject 类型(surge)
           rw = subs[i].split(" ")[0] + " url reject-200"
+          nrw.push(rw)
+        } else if(subs[i].indexOf(" - reject") != -1 ) { //shadowrocket reject
+          rw = subs[i].replace(" - ", " url ")
           nrw.push(rw)
         } else if (subs[i].indexOf("script-path") != -1) { //surge js 旧写法
           type = subs[i].replace(/\s+/g," ").split(" ")[0]
@@ -1248,7 +1291,7 @@ function Rule_Handle(subs, Pout, Pin) {
 }
 
 function Rule_Policy(content) { //增加、替换 policy
-    var cnt = content.replace(/^\s*\-\s/g,"").replace(/REJECT-TINYGIF/gi,"reject").trim().split("//")[0].trim().split(",");
+    var cnt = content.replace(/^\s*\-\s/g,"").replace(/REJECT-TINYGIF/gi,"reject").replace(/REJECT-DROP/gi,"reject").trim().split("//")[0].trim().split(",");
     var RuleK = ["//", "#", ";","[","/", "hostname","no-ipv6","no-system","<","{","}","]","^"];
     var RuleK1 = ["host", "domain", "ip-cidr", "geoip", "user-agent", "ip6-cidr", "ip-asn"];
     const RuleCheck = (item) => cnt[0].trim().toLowerCase().indexOf(item) == 0; //无视注释行
@@ -1277,20 +1320,30 @@ function Rule_Policy(content) { //增加、替换 policy
         } else { nn = nn.replace("IP-CIDR6", "ip6-cidr") }
         return nn
     } else if (cnt.length == 1 && !RuleK.some(RuleCheck) && cnt[0]!="" && cnt[0].indexOf("payload:")==-1 && cnt[0].indexOf("=")==-1 && cnt[0].trim()!="https:") { // 纯域名/ip 列表
+      //$notify("LIST-HANDLE")
       return rule_list_handle(cnt[0])
-    } else { return "" }//if RuleK1 check 
+    } else { 
+      //$notify("Nothing")
+      return "" }//if RuleK1 check 
 }
 
 // 处理纯列表
 function rule_list_handle(cnt) {
-  if(cnt.trim().indexOf(" ")==-1){
+  var RuleK = ["//", "#", ";","[", "!","/"]
+  const RuleCheck = (item) => cnt.trim().indexOf(item) == 0; //无视注释行
+  const nocheck = (item) => /^\d+$/.test(item) //检查数字项
+  cnt = cnt.split("#")[0].trim() // 去除注释部分
+  if(cnt.trim().indexOf(" ")==-1 && cnt.trim()!= "" && !RuleK.some(RuleCheck)){
     if(cnt.indexOf("::")!=-1 && cnt.indexOf("/")!=-1) { // ip-v6?
       cnt = "ip6-cidr, " + cnt
       cnt = Ppolicy == "Shawn" ? cnt+", Shawn" : cnt+", "+Ppolicy
     } else if (cnt.split("/").length == 2) {//ip-cidr
       cnt = "ip-cidr, " + cnt
       cnt = Ppolicy == "Shawn" ? cnt+", Shawn" : cnt+", "+Ppolicy
-    } else if (cnt.indexOf("payload:")==-1) { //host - suffix, clash rule list
+    } else if (cnt.split(".").length == 4 && cnt.split(".").every(nocheck)) {  // ip 类规则
+      cnt = "ip-cidr, " + cnt+ "/32"
+      cnt = Ppolicy == "Shawn" ? cnt+", Shawn" : cnt+", "+Ppolicy
+    } else if (cnt.indexOf("payload:")==-1) { //host - suffix, not clash rule list
       cnt=cnt.replace(/'|"|\+\.|\*\.|\*\.\*/g,"")
       cnt = cnt[0]=="." ? cnt.replace(".",""): cnt
       cnt = "host-suffix, " + cnt
@@ -1378,7 +1431,8 @@ function Subs2QX(subs, Pudp, Ptfo, Pcert0, PTls13) {
     var failedList = [];
     for (var i = 0; i < list0.length; i++) {
         var node = ""
-        if (list0[i].trim().length > 3 && !/\;|\/|\#/.test(list0[i][0])) {
+        //if (Pdbg) {$notify(i, "node", list0[i])}
+        if (list0[i].trim().length > 3 && !/\;|\/|\#/.test(list0[i][0]) && list0[i].indexOf(" url ")==-1) {
             var type = list0[i].split("://")[0].trim()
             var listi = list0[i].replace(/ /g, "")
             var tag0 = list0[i].indexOf("tag=")!=-1 ? list0[i].split(/\&*(emoji|udp|tfo|cert|rename|replace)\=/)[0].split("tag=")[1] : ""
@@ -1436,6 +1490,8 @@ function Subs2QX(subs, Pudp, Ptfo, Pcert0, PTls13) {
             }
             if (Paead == -1) {node = AeadVmess(node)} // vmess 类型 aead 处理
             if (Phost != "") {node = HOST_Handle(node,Phost)} // host 参数修改
+            if (Pobfs != "") {node = OBFS_Handle(node,Pobfs)} // obfs 参数修改
+            if (Psession != "") { node = Session_Handle(node,Psession)} // tls-session 参数
             if (Pcsha256 != "" || Ppsha256 != "") {
             node = SHA256_Handle(node,Pcsha256,Ppsha256)} // Sha256 参数
             if (Palpn !="") { node = ALPN_Handle(node,Palpn)} // alpn 参数
@@ -1539,9 +1595,13 @@ function HPS2QX(subs, Ptfo, Pcert0, PTls13) {
     var server = subs.replace("https://", "").replace("http://", "").trim()//Base64.decode(subs.replace("https://", "")).trim().split("\u0000")[0];
     var nss = []
     if (server != "") {
+      if (server.indexOf("@")!=-1) {
         var ipport = "http=" + server.split("@")[1].split("#")[0].split("/")[0];
         var uname = "username=" + server.split(":")[0];
         var pwd = "password=" + server.split("@")[0].split(":")[1];
+      } else {
+        var ipport = server.split("#")[0].indexOf(":")==-1? "http=" + Base64.decode(server.split("#")[0]) : "http=" + server.split("#")[0]; // https://b64(ipport)
+      }
         var tag = "tag=" + decodeURIComponent(server.split("#")[1]);
         var tls = type == "https"? "over-tls=true": "";
         var cert = Pcert0 != 0 ? "tls-verification=true" : "tls-verification=false";
@@ -1603,7 +1663,7 @@ function VR2QX(subs, Pudp, Ptfo, Pcert0, PTls13) {
   var tfo = subs.indexOf("tfo=1") != -1 ? "fast-open=true, " : "fast-open=false, "
   var udp = Pudp == 1 ? "udp-relay=false, " : "udp-relay=false, ";
   node = ip + tfo + udp
-  var obfs = subs.split("obfs=")[1].split("&")[0].trim()
+  var obfs = subs.indexOf("obfs=")!=-1 ? subs.split("obfs=")[1].split("&")[0].trim() : "none"
   if (obfs == "none") { //
     obfs = subs.indexOf("tls=1") != -1 ? "obfs=over-tls, " : "" //over-tls
   } else if (obfs == "websocket" || obfs == "http") {
@@ -1673,7 +1733,7 @@ function V2QX(subs, Pudp, Ptfo, Pcert0, PTls13) {
     }
     udp = Pudp == 1 ? "udp-relay=false" : "udp-relay=false";
     tfo = Ptfo == 1 ? "fast-open=true" : "fast-open=false";
-    obfs = Pobfs(ss, cert, tls13);
+    obfs = Fobfs(ss, cert, tls13);
     caead = ss.aid && ss.aid != "0" ? "aead=false" : "aead=true"; //aead 选项
     if (obfs == "" || obfs == undefined) {
       nss.push(ip, mtd, pwd, tfo, udp, caead, tag)
@@ -1686,7 +1746,7 @@ function V2QX(subs, Pudp, Ptfo, Pcert0, PTls13) {
 }
 
 // Vmess obfs 参数
-function Pobfs(jsonl, Pcert0, PTls13) {
+function Fobfs(jsonl, Pcert0, PTls13) {
   var obfsi = [];
   var cert = Pcert0;
   tcert = cert == 0 ? "tls-verification=false" : "tls-verification=true";
@@ -1752,6 +1812,8 @@ function RegexOut(content) {
   cnt = content //.split("tag=")[1]
   if (!Preg0.test(cnt)) {
     return content
+  } else {
+    RegoutList.push(cnt)
   }
 }
 
@@ -1831,9 +1893,9 @@ function SSR2QX(subs, Pudp, Ptfo) {
         ip = cnt.split(":")[0] + ":" + cnt.split(":")[1];
         pwd = "password=" + Base64.decode(cnt.split("/?")[0].split(":")[5].replace(/-/g, "+").replace(/_/g, "/")).split("\u0000")[0];
         mtd = "method=" + cnt.split(":")[3];
-        obfs =cnt.split(":")[4]!= "plain"? "obfs=" + cnt.split(":")[4] + ", " : ""; //plain?
+        obfs =cnt.split(":")[4]!= "plain"? "obfs=" + cnt.split(":")[4] : ""; //plain?
         ssrp = cnt.split(":")[2] != "origin"? "ssr-protocol=" + cnt.split(":")[2] : ""; //origin?
-        if (cnt.indexOf("obfsparam=") != -1) {
+        if (cnt.indexOf("obfsparam=") != -1 && obfs != "") {
             obfshost = cnt.split("obfsparam=")[1].split("&")[0] != "" ? "obfs-host=" + Base64.decode(cnt.split("obfsparam=")[1].split("&")[0].replace(/-/g, "+").replace(/_/g, "/")).split(",")[0].split("\u0000")[0] : ""
         }
         if (cnt.indexOf("protoparam=") != -1) {
@@ -1842,7 +1904,7 @@ function SSR2QX(subs, Pudp, Ptfo) {
         tag = "tag=" + (Base64.decode(cnt.split("remarks=")[1].split("&")[0].replace(/-/g, "+").replace(/_/g, "/"))).split("\u0000")[0]
         pudp = Pudp == 1 ? "udp-relay=true" : "udp-relay=false";
         ptfo = Ptfo == 1 ? "fast-open=true" : "fast-open=false";
-        nssr.push(type + ip, pwd, mtd, obfs + obfshost, oparam, ssrp, pudp, ptfo, tag)
+        nssr.push(type + ip, pwd, mtd, obfs , obfshost, oparam, ssrp, pudp, ptfo, tag)
         QX = nssr.filter(Boolean).join(", ")
     } else { QX = "" }
     return QX;
@@ -1919,10 +1981,17 @@ function SS2QX(subs, Pudp, Ptfo) {
     if (cntt.indexOf("v2ray-plugin")==-1) { //Shadowrocket style v2-plugin
       obfs = cnt.split("obfs%3D")[1] != null ? ", obfs=" + cnt.split("obfs%3D")[1].split("%3B")[0].split("#")[0] : "";
       obfshost = cnt.split("obfs-host%3D")[1] != null ? ", obfs-host=" + cnt.split("obfs-host%3D")[1].split("&")[0].split("#")[0] : "";
-    } else {
+    } else if (cnt1 != undefined){
+      //$notify("CNT1","",cnt1)
       cnt1 = JSON.parse(cnt1)
       obfs= cnt1.tls? ", obfs=wss" : ", obfs=ws"
       obfshost = cnt1.host? ", obfs-host="+cnt1.host+", tls-verification=false" : ""
+    } else {
+      cnt1 = decodeURIComponent(cntt.split("v2ray-plugin")[1])
+      obfs= cnt1.indexOf("tls")!=-1? ", obfs=wss" : ", obfs=ws"
+      obfshost = cnt1.indexOf("host=")!=-1? ", obfs-host="+cnt1.split("host=")[1].split(";")[0].split("#")[0].trim() : ""
+      obfshost = obfshost != "obfs-host="? obfshost : ""
+      //$notify("CNTT","",cnt1+obfs+obfshost)
     }
     tag = "tag=" + decodeURIComponent(cnt.split("#")[1])
     pudp = Pudp == 1 ? "udp-relay=true" : "udp-relay=false";
@@ -1975,22 +2044,23 @@ function SSD2QX(subs, Pudp, Ptfo) {
 
 // 纠正部分不规范的写法(没有把 tag 写在最后)
 function QXFix(cntf) {
-  var cnti = cntf.replace(/tag\s+\=/g,"tag=").replace("chacha20-poly","chacha20-ietf-poly")
-  var hd = cnti.split("tag=")[0]
-  var tag = "tag="+cnti.split("tag=")[1].split(",")[0].trim()
+var cnti = cntf.replace(/\s*tag\s*\=/g,"tag=").replace("chacha20-poly","chacha20-ietf-poly")
+  var hd = cnti.split(",tag=")[0]
+  var tag = "tag="+cnti.split(",tag=")[1].split(",")[0].trim()
   var tail = cnti.split(tag+",")
-  cnti = tail.length<=1?  cnti : String(hd + tail[1].split("\r")[0] +"," + tag)
-  cntis = cnti.split(",") //防止节点名中有,符号而导致的错误情况
+  cnti = tail.length<=1?  cnti : String(hd + ","+tail[1].split("\r")[0] +"," + tag)
+  cntis = cnti.split(",").filter(Boolean).map(item => item.trim()) //防止节点名中有,符号而导致的错误情况
   tagfix = ""
   cntii = ""
   for (i in cntis) {
-    if (cntis[i].indexOf("=") == -1 && cntis[i].trim() !="") {
+    if (cntis[i].indexOf("=") == -1 && cntis[i].trim() !="") {  // tag 中多出的项目
       tagfix += ","+cntis[i]
     } else {
-      cntis[i].indexOf("tag=") == -1? cntii += cntis[i]+", ": cntii
+      cntis[i].indexOf("tag=") != 0? cntii += cntis[i]+", ": cntii=cntii
     }
   }
   cntii = cntii+tag+tagfix
+  //$notify("tag-fix","Look","cntf:\n"+cntf+"\nhd:\n"+hd+"\ntag:\n"+tag+"\ntail:\n"+tail+"\ncnti: \n"+cnti +"\n\ncntii: \n"+cntii)
   return cntii
 }
 
@@ -2728,7 +2798,7 @@ function YAMLFix(cnt){
     cnt = cnt.replace(/{\s*name: /g,"{name: \"").replace(/, server:/g,"\", server:")
     cnt = cnt.replace(/{|}/g,"").replace(/,/g,"\n   ")
   }
-  cnt = cnt.replace(/  -\n.*name/g,"  - name").replace(/\$|\`/g,"").split("proxy-providers:")[0].split("proxy-groups:")[0].replace(/\"(name|type|server|port|cipher|password|)(\"*)/g,"$1")
+  cnt = cnt.replace(/  -\s*\n.*name/g,"  - name").replace(/\$|\`/g,"").split("proxy-providers:")[0].split("proxy-groups:")[0].replace(/\"(name|type|server|port|cipher|password|)(\"*)/g,"$1")
   // console.log("part-fix:\n"+cnt.split("proxies:")[1])
   // cnt = cnt.indexOf("proxies:") == -1? "proxies:\n" + cnt :"proxies:"+cnt.split("proxies:")[1]
   cnt = cnt.replace(/name\:(.*?)\:(.*?)\n/gmi,"name:$1冒号$2\n").replace(/\s{6}Host\:/g,"      Host:")//.replace(/\{\s*(Host\:.*)\}/gmi,"$1") //罕见bug情况 修复
@@ -2738,8 +2808,8 @@ function YAMLFix(cnt){
   //2022-05-11 增加⬇️
   //cnt = cnt.replace(/\n\s{4}headers/g,"\n      headers").replace(/\n\s{6}(H|h)ost/g,"\n        Host").replace(/\t/g,"")
   //2022-06-07 修改为👇，解决部分无 proxies 字段的
-  cnt = cnt.indexOf("proxies:") != -1?cnt.replace(/\n\s{4}headers/g,"\n      headers").replace(/\n\s{6}(H|h)ost/g,"\n        Host").replace(/\t/g,""):cnt
-  
+  cnt = cnt.indexOf("proxies:") != -1?cnt.replace(/\n\s{4}headers/g,"\n      headers").replace(/\n\s{6}Host/g,"\n        Host").replace(/\t/g,""):cnt
+  //2022-09-01 remove host in s{6}(H|h)ost
   //console.log("part-fix:\n"+cnt.split("proxies:")[1])
   cnt = cnt.indexOf("proxies:") == -1? "proxies:\n" + cnt :"proxies:"+cnt.split("proxies:")[1]
   console.log("after-fix\n"+cnt)
