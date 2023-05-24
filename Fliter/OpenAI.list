@@ -1,3 +1,10 @@
 # > OpenAI
 DOMAIN-KEYWORD,openai,OpenAI
 DOMAIN-SUFFIX,openai.com,OpenAI
+DOMAIN-SUFFIX,auth0.com,OpenAI
+DOMAIN-SUFFIX,featuregates.org,OpenAI
+DOMAIN-SUFFIX,statsiapi.net,OpenAI
+DOMAIN-SUFFIX,intercom.io,OpenAI
+DOMAIN-SUFFIX,intercomcdn.io,OpenAI
+DOMAIN-SUFFIX,sentry.io,OpenAI
+DOMAIN-SUFFIX,sentry.dev,OpenAI
