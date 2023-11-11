@@ -1,1 +1,4 @@
-
+# > TikTok Music    
+USER-AGENT,TikTok Music*,TikTok Music 
+DOMAIN-SUFFIX,tiktokmusic.me,TikTok Music
+DOMAIN-SUFFIX,tiktokmusic.app,TikTok Music 
